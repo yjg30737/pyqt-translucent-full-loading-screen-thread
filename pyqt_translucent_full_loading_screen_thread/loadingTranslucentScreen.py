@@ -21,6 +21,7 @@ class LoadingTranslucentScreen(QWidget):
 
         self.__movieLbl = QLabel(self.__parent)
 
+        # get icon's path based on the main module's path
         caller_path = os.path.dirname(inspect.getframeinfo(sys._getframe(1)).filename)
         loading_screen_ico_filename = os.path.join(caller_path, 'ico/Loading.gif')
 
