@@ -70,13 +70,15 @@ if __name__ == '__main__':
     app.exec()
 ```
 
-### Result of ```LoadingThread``` which is module itself
+### Result
+
+#### 1. Result of ```LoadingThread``` which is module itself
 
 https://user-images.githubusercontent.com/55078043/152280930-ee1c8f9f-aca7-493c-aaeb-a6ec24daa75e.mp4
 
 Loading screen is shown for 5 seconds.
 
-### Result of ```MyThread``` which inherits the ```LoadingThread```
+#### 2. Result of ```MyThread``` which inherits the ```LoadingThread```
 
 https://user-images.githubusercontent.com/55078043/152280946-65a9df9f-ca6e-4b01-8c43-e68304c74a66.mp4
 
