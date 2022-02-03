@@ -1,3 +1,5 @@
+import os, inspect, sys
+
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QGraphicsOpacityEffect
 from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QMovie, QPalette, QColor
@@ -19,7 +21,10 @@ class LoadingTranslucentScreen(QWidget):
 
         self.__movieLbl = QLabel(self.__parent)
 
-        self.__loading_mv = QMovie('ico/Loading.gif')
+        caller_path = os.path.dirname(inspect.getframeinfo(sys._getframe(1)).filename)
+        loading_screen_ico_filename = os.path.join(caller_path, 'ico/Loading.gif')
+
+        self.__loading_mv = QMovie(loading_screen_ico_filename)
         self.__loading_mv.setScaledSize(QSize(45, 45))
         self.__movieLbl.setMovie(self.__loading_mv)
         self.__movieLbl.setStyleSheet('QLabel { background: transparent; }')
