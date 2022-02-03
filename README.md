@@ -7,6 +7,19 @@ PyQt5 >= 5.8
 ## Setup
 ```pip3 install git+https://github.com/yjg30737/pyqt-translucent-full-loading-screen-thread.git --upgrade```
 
+## Detailed Description
+```LoadingThread(parent: QWidget, *args, **kwargs)``` is main thread you have to use. 
+
+You just give the parent widget to LoadingThread as a first argument. 
+
+Then loading screen will be shown when you start the ```LoadingThread```. 
+
+Default ```run()``` task of this thread is ```time.sleep(5)```. 
+
+You can inherit this module and override run method.
+
+This is detailed description, by the way.
+
 ## Example
 ### Code Sample
 ```python
