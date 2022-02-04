@@ -28,7 +28,7 @@ from PyQt5.QtWidgets import QPushButton, QTextEdit, QVBoxLayout, QWidget, QAppli
 
 from pyqt_translucent_full_loading_screen_thread import LoadingThread, LoadingTranslucentScreen
 
-
+# for second example
 class MyThread(LoadingThread):
 
     def __init__(self, *args, **kwargs):
@@ -58,6 +58,8 @@ class Main(QWidget):
         self.__loadingTranslucentScreen = LoadingTranslucentScreen(parent=self,
                                                                    description_text='Waiting...')
         self.__thread = LoadingThread(loading_screen=self.__loadingTranslucentScreen)
+        # for second example
+        # self.__thread = MyThread(loading_screen=self.__loadingTranslucentScreen)
         self.__thread.start()
 
 
