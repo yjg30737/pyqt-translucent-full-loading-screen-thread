@@ -8,15 +8,19 @@ PyQt5 >= 5.8
 ```pip3 install git+https://github.com/yjg30737/pyqt-translucent-full-loading-screen-thread.git --upgrade```
 
 ## Usage
-This package mainly consists of two classes. ```LoadingTranslucentScreen``` and ```LoadingThread```. I can show you how it works basically.
+This package mainly consists of two classes. ```LoadingTranslucentScreen(parent: QWidget, description_text: str = '', dot_animation: bool = True)``` and ```LoadingThread(loading_screen: LoadingTranslucentScreen)```. I can show you how it works basically.
 ```python
 self.loadingTranslucentScreen = LoadingTranslucentScreen(parent=self,
-                                                           description_text='Waiting...')
+                                                           description_text='Waiting...', dot_animation=False)
 self.thread = LoadingThread(loading_screen=self.loadingTranslucentScreen)
 self.thread.start()
 ```
 
-Just give the parent widget to ```LoadingTranslucentScreen``` as a first argument. Second argument is description text of ```QLabel``` which will be shown with loading icon(loading icon is .gif extension, ```QMovie``` will get the gif loading icon) when you start the ```LoadingThread```.
+Just give the parent widget to ```LoadingTranslucentScreen``` as a <b>first argument</b>. 
+
+<b>Second argument</b> is description text of ```QLabel``` which will be shown with loading icon(loading icon is .gif extension, ```QMovie``` will get the gif loading icon) when you start the ```LoadingThread```. Defaut value is empty string.
+
+<b>Third argument</b>(```dot_animation```) decides if triple dots animation of description text will operate or not. There is an explanation of triple dots animation feature below. Default value is True.
 
 Give instant of ```LoadingTranslucentScreen``` to ```LoadingThread```'s argument and call the start method of it. 
 
