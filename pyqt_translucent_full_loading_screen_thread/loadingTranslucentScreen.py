@@ -1,17 +1,15 @@
 import os, inspect, sys
 
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QGraphicsOpacityEffect
-from PyQt5.QtCore import QSize, Qt
+from PyQt5.QtCore import QSize, Qt, QThread
 from PyQt5.QtGui import QMovie, QPalette, QColor
 
 
 class LoadingTranslucentScreen(QWidget):
-    def __init__(self, parent: QWidget, parent_thread, description_text: str = ''):
+    def __init__(self, parent: QWidget, description_text: str = ''):
         super().__init__(parent)
         self.__parent = parent
         self.__parent.installEventFilter(self)
-
-        self.__thread = parent_thread
 
         self.__parent.resizeEvent = self.resizeEvent
         self.__initUi(description_text)
@@ -21,7 +19,6 @@ class LoadingTranslucentScreen(QWidget):
 
         self.__movieLbl = QLabel(self.__parent)
 
-        # get icon's path based on the main module's path
         caller_path = os.path.dirname(inspect.getframeinfo(sys._getframe(1)).filename)
         loading_screen_ico_filename = os.path.join(caller_path, 'ico/Loading.gif')
 
@@ -48,6 +45,9 @@ class LoadingTranslucentScreen(QWidget):
         self.setMinimumSize(self.__parent.width(), self.__parent.height())
 
         self.setVisible(False)
+
+    def setParentThread(self, parent_thread: QThread):
+        self.__thread = parent_thread
 
     def start(self):
         self.__loading_mv.start()

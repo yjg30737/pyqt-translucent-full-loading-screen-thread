@@ -9,12 +9,11 @@ from pyqt_translucent_full_loading_screen_thread.loadingTranslucentScreen import
 class LoadingThread(QThread):
     loadingSignal = pyqtSignal()
 
-    def __init__(self, parent: QWidget, *args, **kwargs):
+    def __init__(self, loading_screen: LoadingTranslucentScreen, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.__parent = parent
 
-        self.__loadingTranslucentScreen = LoadingTranslucentScreen(parent=self.__parent, parent_thread=self,
-                                                                   description_text='Waiting...')
+        self.__loadingTranslucentScreen = loading_screen
+        self.__loadingTranslucentScreen.setParentThread(self)
         self.started.connect(self.__loadingTranslucentScreen.start)
         self.finished.connect(self.__loadingTranslucentScreen.stop)
         self.started.connect(self.__loadingTranslucentScreen.makeParentDisabledDuringLoading)
