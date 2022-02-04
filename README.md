@@ -7,18 +7,32 @@ PyQt5 >= 5.8
 ## Setup
 ```pip3 install git+https://github.com/yjg30737/pyqt-translucent-full-loading-screen-thread.git --upgrade```
 
-## Detailed Description
-```LoadingThread(parent: QWidget, *args, **kwargs)``` is main thread you have to use. 
+## Usage
+This package mainly consists of two classes. ```LoadingTranslucentScreen``` and ```LoadingThread```. I can show you how it works basically.
+```python
+self.loadingTranslucentScreen = LoadingTranslucentScreen(parent=self,
+                                                           description_text='Waiting...')
+self.thread = LoadingThread(loading_screen=self.loadingTranslucentScreen)
+self.thread.start()
+```
 
-You just give the parent widget to LoadingThread as a first argument. 
+Just give the parent widget to ```LoadingTranslucentScreen``` as a first argument. Second argument is description text of ```QLabel``` which will be shown with loading icon(loading icon is .gif extension, ```QMovie``` will get the gif loading icon) when you start the ```LoadingThread```.  
 
-Then loading screen will be shown when you start the ```LoadingThread```. 
-
-Default ```run()``` task of this thread is ```time.sleep(5)```. 
+Default ```run()``` task of this thread is ```time.sleep(5)```.
 
 You can inherit this module and override run method.
 
-This is detailed description, by the way.
+You can use ```setDescriptionLabelDirection(direction: str)``` method of ```LoadingTranslucentScreen``` to set the direction of description label.
+
+Valid argument is ```Left```, ```Right```, ```Top```, ```Bottom```. All of them should be ```str``` type.
+
+Default direction is ```Bottom```.
+
+I show you how to use the method ```setDescriptionLabelDirection```.
+```python
+self.loadingTranslucentScreen.setDescriptionLabelDirection('Right')
+```
+If you set the description label direction right like the example above, description text will be shown on the right side of the loading icon.
 
 ## Example
 ### Code Sample
