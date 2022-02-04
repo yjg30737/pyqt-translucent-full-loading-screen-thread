@@ -67,7 +67,7 @@ class LoadingTranslucentScreen(QWidget):
             self.__descriptionLbl.setText(cur_text + dot)
 
     def setDisabledToDotAnimation(self, f: bool):
-        self.__dotAnimationFlag = f
+        self.__dotAnimationFlag = not f
 
     def setParentThread(self, parent_thread: QThread):
         self.__thread = parent_thread
