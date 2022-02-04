@@ -101,13 +101,13 @@ if __name__ == '__main__':
 
 #### 1. Result of ```LoadingThread``` which is module itself
 
-https://user-images.githubusercontent.com/55078043/152280930-ee1c8f9f-aca7-493c-aaeb-a6ec24daa75e.mp4
+https://user-images.githubusercontent.com/55078043/152469234-50e72870-e0c4-4b6a-a364-3a28fd23c501.mp4
 
 Loading screen is shown for 5 seconds.
 
 #### 2. Result of ```MyThread``` which inherits the ```LoadingThread```
 
-https://user-images.githubusercontent.com/55078043/152280946-65a9df9f-ca6e-4b01-8c43-e68304c74a66.mp4
+https://user-images.githubusercontent.com/55078043/152469243-3044ff32-afe5-4e35-8c61-7b9003e30bf4.mp4
 
 Loading screen is shown for 1 second. Because ```run()``` method of ```MyThread``` overrides ```LoadingThread```'s.
 
