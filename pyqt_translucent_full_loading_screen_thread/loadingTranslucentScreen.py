@@ -1,7 +1,7 @@
 import os, inspect, sys
 
 from PyQt5.QtWidgets import QWidget, QLabel, QGridLayout, QGraphicsOpacityEffect
-from PyQt5.QtCore import QSize, Qt, QThread
+from PyQt5.QtCore import QSize, Qt, QThread, QTimer
 from PyQt5.QtGui import QMovie, QPalette, QColor
 
 
@@ -11,7 +11,15 @@ class LoadingTranslucentScreen(QWidget):
         self.__parent = parent
         self.__parent.installEventFilter(self)
 
+        self.__descriptionLbl_original_text = description_text
+
         self.__parent.resizeEvent = self.resizeEvent
+
+        self.__timer = QTimer(self)
+        self.__timer.timeout.connect(self.__ticking)
+        self.__timer.singleShot(0, self.__ticking)
+        self.__timer.start(500)
+
         self.__initUi(description_text)
 
     def __initUi(self, description_text):
@@ -43,6 +51,15 @@ class LoadingTranslucentScreen(QWidget):
         self.setMinimumSize(self.__parent.width(), self.__parent.height())
 
         self.setVisible(False)
+
+    def __ticking(self):
+        dot = '.'
+        cur_text = self.__descriptionLbl.text()
+        cnt = cur_text.count(dot)
+        if cnt % 3 == 0 and cnt != 0:
+            self.__descriptionLbl.setText(self.__descriptionLbl_original_text + dot)
+        else:
+            self.__descriptionLbl.setText(cur_text + dot)
 
     def setParentThread(self, parent_thread: QThread):
         self.__thread = parent_thread
