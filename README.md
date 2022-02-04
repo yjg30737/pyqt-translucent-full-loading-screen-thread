@@ -81,6 +81,7 @@ class Main(QWidget):
     def __startLoadingThread(self):
         self.__loadingTranslucentScreen = LoadingTranslucentScreen(parent=self,
                                                                    description_text='Waiting')
+        self.__loadingTranslucentScreen.setDescriptionLabelDirection('Right')
         self.__thread = LoadingThread(loading_screen=self.__loadingTranslucentScreen)
         # for second result
         # self.__thread = MyThread(loading_screen=self.__loadingTranslucentScreen)
