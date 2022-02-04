@@ -10,10 +10,11 @@ class LoadingTranslucentScreen(QWidget):
         super().__init__(parent)
         self.__parent = parent
         self.__parent.installEventFilter(self)
+        self.__parent.resizeEvent = self.resizeEvent
+
+        self.__dotAnimationFlag = True
 
         self.__descriptionLbl_original_text = description_text
-
-        self.__parent.resizeEvent = self.resizeEvent
 
         self.__initUi(description_text)
 
@@ -47,10 +48,14 @@ class LoadingTranslucentScreen(QWidget):
 
         self.setVisible(False)
 
-        self.__timer = QTimer(self)
-        self.__timer.timeout.connect(self.__ticking)
-        self.__timer.singleShot(0, self.__ticking)
-        self.__timer.start(500)
+        self.__timerInit()
+
+    def __timerInit(self):
+        if self.__dotAnimationFlag:
+            self.__timer = QTimer(self)
+            self.__timer.timeout.connect(self.__ticking)
+            self.__timer.singleShot(0, self.__ticking)
+            self.__timer.start(500)
 
     def __ticking(self):
         dot = '.'
@@ -60,6 +65,9 @@ class LoadingTranslucentScreen(QWidget):
             self.__descriptionLbl.setText(self.__descriptionLbl_original_text + dot)
         else:
             self.__descriptionLbl.setText(cur_text + dot)
+
+    def setDisabledToDotAnimation(self, f: bool):
+        self.__dotAnimationFlag = f
 
     def setParentThread(self, parent_thread: QThread):
         self.__thread = parent_thread
