@@ -35,8 +35,8 @@ class LoadingTranslucentScreen(QWidget):
             self.__descriptionLbl.setAlignment(Qt.AlignVCenter | Qt.AlignCenter)
 
         lay = QVBoxLayout()
-        lay.addWidget(self.__movieLbl)
-        lay.addWidget(self.__descriptionLbl)
+        lay.addWidget(self.__movieLbl, 0, 0, 1, 1)
+        lay.addWidget(self.__descriptionLbl, 1, 0, 1, 1)
         lay.setContentsMargins(0, 0, 0, 0)
         lay.setAlignment(Qt.AlignVCenter | Qt.AlignCenter)
 
@@ -48,6 +48,21 @@ class LoadingTranslucentScreen(QWidget):
 
     def setParentThread(self, parent_thread: QThread):
         self.__thread = parent_thread
+
+    def setLabelDirection(self, direction: str):
+        if direction == 'Left':
+            self.layout().addWidget(self.__descriptionLbl, 0, 0, 1, 1)
+            self.layout().addWidget(self.__movieLbl, 0, 1, 1, 1)
+        elif direction == 'Top':
+            self.layout().addWidget(self.__descriptionLbl, 0, 0, 1, 1)
+            self.layout().addWidget(self.__movieLbl, 1, 0, 1, 1)
+        elif direction == 'Right':
+            self.layout().addWidget(self.__movieLbl, 0, 0, 1, 1)
+            self.layout().addWidget(self.__descriptionLbl, 0, 1, 1, 1)
+        elif direction == 'Bottom':
+            pass
+        else:
+            raise BaseException('Invalid direction.')
 
     def start(self):
         self.__loading_mv.start()
