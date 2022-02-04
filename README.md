@@ -48,6 +48,11 @@ self.loadingTranslucentScreen.setDescriptionLabelDirection('Right')
 ```
 If you set the description label direction right like the example above, description text will be shown on the right side of the loading icon.
 
+If you want to show loading icon only, make instance like this.
+```python
+self.__loadingTranslucentScreen = LoadingTranslucentScreen(parent=self, dot_animation=False)
+```
+
 ## Example
 ### Code Sample
 ```python
