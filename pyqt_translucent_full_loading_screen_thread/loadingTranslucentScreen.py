@@ -49,7 +49,7 @@ class LoadingTranslucentScreen(QWidget):
     def setParentThread(self, parent_thread: QThread):
         self.__thread = parent_thread
 
-    def setLabelDirection(self, direction: str):
+    def setDescriptionLabelDirection(self, direction: str):
         if direction == 'Left':
             self.layout().addWidget(self.__descriptionLbl, 0, 0, 1, 1)
             self.layout().addWidget(self.__movieLbl, 0, 1, 1, 1)
