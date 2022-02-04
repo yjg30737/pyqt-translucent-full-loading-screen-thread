@@ -26,6 +26,14 @@ You can inherit this module and override run method.
 
 You can use ```setDescriptionLabelDirection(direction: str)``` method of ```LoadingTranslucentScreen``` to set the direction of description label.
 
+If thread starts running, dot animation will be activated. If the description text is 'Waiting', dot animation will be like below.
+```
+Waiting.
+Waiting..
+Waiting...
+```
+Of course this feature can reveal a couple of potential flaws if any dots are included in description text. I will fix that soon enough.
+
 Valid argument is ```Left```, ```Right```, ```Top```, ```Bottom```. All of them should be ```str``` type.
 
 Default direction is ```Bottom```.
