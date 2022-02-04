@@ -6,13 +6,13 @@ from PyQt5.QtGui import QMovie, QPalette, QColor
 
 
 class LoadingTranslucentScreen(QWidget):
-    def __init__(self, parent: QWidget, description_text: str = ''):
+    def __init__(self, parent: QWidget, description_text: str = '', dot_animation: bool = True):
         super().__init__(parent)
         self.__parent = parent
         self.__parent.installEventFilter(self)
         self.__parent.resizeEvent = self.resizeEvent
 
-        self.__dotAnimationFlag = True
+        self.__dot_animation_flag = dot_animation
 
         self.__descriptionLbl_original_text = description_text
 
@@ -51,7 +51,7 @@ class LoadingTranslucentScreen(QWidget):
         self.__timerInit()
 
     def __timerInit(self):
-        if self.__dotAnimationFlag:
+        if self.__dot_animation_flag:
             self.__timer = QTimer(self)
             self.__timer.timeout.connect(self.__ticking)
             self.__timer.singleShot(0, self.__ticking)
@@ -65,9 +65,6 @@ class LoadingTranslucentScreen(QWidget):
             self.__descriptionLbl.setText(self.__descriptionLbl_original_text + dot)
         else:
             self.__descriptionLbl.setText(cur_text + dot)
-
-    def setDisabledToDotAnimation(self, f: bool):
-        self.__dotAnimationFlag = not f
 
     def setParentThread(self, parent_thread: QThread):
         self.__thread = parent_thread
