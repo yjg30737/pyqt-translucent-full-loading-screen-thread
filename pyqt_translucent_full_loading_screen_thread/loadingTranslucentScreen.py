@@ -15,11 +15,6 @@ class LoadingTranslucentScreen(QWidget):
 
         self.__parent.resizeEvent = self.resizeEvent
 
-        self.__timer = QTimer(self)
-        self.__timer.timeout.connect(self.__ticking)
-        self.__timer.singleShot(0, self.__ticking)
-        self.__timer.start(500)
-
         self.__initUi(description_text)
 
     def __initUi(self, description_text):
@@ -51,6 +46,11 @@ class LoadingTranslucentScreen(QWidget):
         self.setMinimumSize(self.__parent.width(), self.__parent.height())
 
         self.setVisible(False)
+
+        self.__timer = QTimer(self)
+        self.__timer.timeout.connect(self.__ticking)
+        self.__timer.singleShot(0, self.__ticking)
+        self.__timer.start(500)
 
     def __ticking(self):
         dot = '.'
