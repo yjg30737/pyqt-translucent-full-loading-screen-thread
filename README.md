@@ -16,7 +16,9 @@ self.thread = LoadingThread(loading_screen=self.loadingTranslucentScreen)
 self.thread.start()
 ```
 
-Just give the parent widget to ```LoadingTranslucentScreen``` as a first argument. Second argument is description text of ```QLabel``` which will be shown with loading icon(loading icon is .gif extension, ```QMovie``` will get the gif loading icon) when you start the ```LoadingThread```.  
+Just give the parent widget to ```LoadingTranslucentScreen``` as a first argument. Second argument is description text of ```QLabel``` which will be shown with loading icon(loading icon is .gif extension, ```QMovie``` will get the gif loading icon) when you start the ```LoadingThread```.
+
+Give instant of ```LoadingTranslucentScreen``` to ```LoadingThread```'s argument and call the start method of it. 
 
 Default ```run()``` task of this thread is ```time.sleep(5)```.
 
@@ -70,7 +72,7 @@ class Main(QWidget):
 
     def __startLoadingThread(self):
         self.__loadingTranslucentScreen = LoadingTranslucentScreen(parent=self,
-                                                                   description_text='Waiting...')
+                                                                   description_text='Waiting')
         self.__thread = LoadingThread(loading_screen=self.__loadingTranslucentScreen)
         # for second result
         # self.__thread = MyThread(loading_screen=self.__loadingTranslucentScreen)
