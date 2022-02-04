@@ -1,6 +1,6 @@
 import os, inspect, sys
 
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QGraphicsOpacityEffect
+from PyQt5.QtWidgets import QWidget, QLabel, QGridLayout, QGraphicsOpacityEffect
 from PyQt5.QtCore import QSize, Qt, QThread
 from PyQt5.QtGui import QMovie, QPalette, QColor
 
@@ -34,13 +34,11 @@ class LoadingTranslucentScreen(QWidget):
             self.__descriptionLbl.setVisible(False)
             self.__descriptionLbl.setAlignment(Qt.AlignVCenter | Qt.AlignCenter)
 
-        lay = QVBoxLayout()
-        lay.addWidget(self.__movieLbl, 0, 0, 1, 1)
-        lay.addWidget(self.__descriptionLbl, 1, 0, 1, 1)
+        lay = QGridLayout()
         lay.setContentsMargins(0, 0, 0, 0)
         lay.setAlignment(Qt.AlignVCenter | Qt.AlignCenter)
-
         self.setLayout(lay)
+        self.setDescriptionLabelDirection('Bottom')  # default description label direction
 
         self.setMinimumSize(self.__parent.width(), self.__parent.height())
 
@@ -50,17 +48,19 @@ class LoadingTranslucentScreen(QWidget):
         self.__thread = parent_thread
 
     def setDescriptionLabelDirection(self, direction: str):
+        lay = self.layout()
         if direction == 'Left':
-            self.layout().addWidget(self.__descriptionLbl, 0, 0, 1, 1)
-            self.layout().addWidget(self.__movieLbl, 0, 1, 1, 1)
+            lay.addWidget(self.__descriptionLbl, 0, 0, 1, 1)
+            lay.addWidget(self.__movieLbl, 0, 1, 1, 1)
         elif direction == 'Top':
-            self.layout().addWidget(self.__descriptionLbl, 0, 0, 1, 1)
-            self.layout().addWidget(self.__movieLbl, 1, 0, 1, 1)
+            lay.addWidget(self.__descriptionLbl, 0, 0, 1, 1)
+            lay.addWidget(self.__movieLbl, 1, 0, 1, 1)
         elif direction == 'Right':
-            self.layout().addWidget(self.__movieLbl, 0, 0, 1, 1)
-            self.layout().addWidget(self.__descriptionLbl, 0, 1, 1, 1)
+            lay.addWidget(self.__movieLbl, 0, 0, 1, 1)
+            lay.addWidget(self.__descriptionLbl, 0, 1, 1, 1)
         elif direction == 'Bottom':
-            pass
+            lay.addWidget(self.__movieLbl, 0, 0, 1, 1)
+            lay.addWidget(self.__descriptionLbl, 1, 0, 1, 1)
         else:
             raise BaseException('Invalid direction.')
 
